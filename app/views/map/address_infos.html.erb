@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>Address Information for All POIs</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 600px; }
+  </style>
+</head>
+<body>
+  <h1>Charge Stations</h1>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var map = L.map('map').setView([0, 0], 2); 
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      <% @address_infos.each do |address_info| %>
+        var marker = L.marker([<%= address_info['Latitude'] %>, <%= address_info['Longitude'] %>])
+          .bindPopup('<h2><%= address_info['Title'] %></h2><p><%= address_info['AddressLine1'] %>, <%= address_info['Town'] %>, <%= address_info['StateOrProvince'] %>, <%= address_info['Postcode'] %></p>')
+          .addTo(map);
+      <% end %>
+    });
+  </script>
+</body>
+</html>
