@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Address Information for All POIs</title>
+  <title>Charge Stations</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map { height: 600px; }
@@ -22,7 +22,7 @@
 
       <% @address_infos.each do |address_info| %>
         var marker = L.marker([<%= address_info['Latitude'] %>, <%= address_info['Longitude'] %>])
-          .bindPopup('<h2><%= address_info['Title'] %></h2><p><%= address_info['AddressLine1'] %>, <%= address_info['Town'] %>, <%= address_info['StateOrProvince'] %>, <%= address_info['Postcode'] %></p>')
+          .bindPopup('<h2><%= address_info['Title'] %></h2><p><%= address_info['AddressLine1'] %>, <%= address_info['Town'] %>, <%= address_info['StateOrProvince'] %>, <%= address_info['Postcode'] %></p> <%= address_info['Country']['Title'] %></p>')
           .addTo(map);
       <% end %>
     });
